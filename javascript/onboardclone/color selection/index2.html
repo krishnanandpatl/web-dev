@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style2.css">
+</head>
+<body>
+    <div class="outer">
+        <div id="red"></div>
+        <div id="blue"></div>
+        <div id="green"></div>
+    </div>
+    <div class="color-area"></div>
+</body>
+<script>
+    let color="black";
+    let blueb=document.querySelector("#blue");
+    blueb.addEventListener("click",function(){
+        box.style.backgroundColor="blue";
+    })
+    let redb=document.querySelector("#red");
+    redb.addEventListener("click",function(){
+        box.style.backgroundColor="red";
+    })
+    let greenb=document.querySelector("#green");
+    greenb.addEventListener("click",function(){
+        box.style.backgroundColor="green";
+    })
+    let box=document.querySelector(".color-area");
+</script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <div class="toolbar">
+        <div class="tool"  id="pencil">
+            <img src="./NewIcons/Black_Pencil.svg" alt="Black_Pencil" class="tool-img">
+            <div class="size-box">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
+        </div>
+        <div class="tool" id="eraser">
+            <img src="./NewIcons/Eraser.svg" alt="" class="tool-img">
+            <div class="size-box">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
+        </div>
+        <div class="tool" id="rect">
+            <i class="fa-solid fa-square"></i>
+            <div class="size-box">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
+        </div>
+        <div class="tool"  id="line">
+            <i class="fa-solid fa-grip-lines-vertical"></i>
+            <div class="size-box">
+                <div class="size1 size"></div>
+                <div class="size2 size"></div>
+                <div class="size3 size"></div>
+                <div class="size4 size"></div>
+            </div>
+        </div>
+        <div class="tool" id="download">
+                <img src="./NewIcons/Download.svg" alt="download" class="tool-img">
+        </div>
+        <div class="tool" id="notes">
+            <img src="./NewIcons/StickyNote.svg" alt="download" class="tool-img">
+         </div>
+        <div class="color-container">
+            <div id="red"></div>
+            <div id="blue"></div>
+            <div id="green"></div>
+        </div>
+    </div>
+    <canvas></canvas>
+</body>
+<script src="./menu.js"></script>
+<script src="./color.js"></script>
+<script type="module" src="./download.js"></script>
+<script src="./tool.js"></script>
+<script src="./size.js"></script>
+<script src="./draw.js"></script>
+<script src="./notes.js"></script>
+</html>

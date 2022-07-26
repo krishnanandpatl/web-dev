@@ -1,0 +1,50 @@
+body.addEventListener("mousedown",function(e){  
+    if(ctool=="pencil"||ctool=="eraser"){
+        tool.beginPath();
+    tool.moveTo(e.clientX-boardLeft,e.clientY-boardTop);
+    drawmode=true;
+    }
+})
+body.addEventListener("mouseup",function(e){
+    drawmode=false;
+})
+body.addEventListener("mousemove",function(e){
+    if(drawmode==false)
+        return;
+   if(ctool=="pencil"||ctool=="eraser"){
+     fx=e.clientX-boardLeft;
+    fy=e.clientY-boardTop;
+    tool.lineWidth=wid;
+    tool.lineTo(fx,fy);
+    tool.stroke();
+    ix=fx;
+    iy=fy;
+   }
+})
+
+if(ctool!="pencil"||ctool!="eraser"){
+    body.addEventListener("mousedown",function(e){
+        //console.log(e);
+        xPos=e.clientX-boardLeft;
+        yPos=e.clientY-boardTop;
+    })
+    body.addEventListener("mouseup",function(e){
+        //console.log(e);
+        aPos=e.clientX-boardLeft;
+        bPos=e.clientY-boardTop;
+        //console.log(aPos,bPos);
+        let wids=aPos-xPos;
+        let hei=bPos-yPos;
+        if(ctool=="rect"){
+        tool.lineWidth=wid;
+        tool.strokeRect(xPos,yPos,wids,hei);
+        }
+        else if(ctool=="line"){
+            tool.beginPath();
+            tool.moveTo(xPos,yPos);
+            tool.lineTo(aPos,bPos);
+            tool.lineWidth=wid;
+            tool.stroke();
+        }
+    })
+}

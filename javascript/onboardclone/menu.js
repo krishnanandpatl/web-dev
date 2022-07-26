@@ -1,0 +1,10 @@
+let canvasBoard=document.querySelector("canvas");
+let tool=canvasBoard.getContext("2d");
+canvasBoard.height=window.innerHeight;
+canvasBoard.width=window.innerWidth;
+let body=document.querySelector("body");
+let boardTop=canvasBoard.getBoundingClientRect().top;
+let boardLeft=canvasBoard.getBoundingClientRect().left;
+let ix,iy,fx,fy;
+let xPos,yPos,aPos,bPos;
+let drawmode=false;
