@@ -40,6 +40,12 @@ let userSchema=new mongoose.Schema({
         minLength:[10,"Minimum length is 10"],
         maxLength:[10,"Maximum length is 10"]
     },
+    otp: {
+        type: "String"
+    },
+    otpExpiry:{
+        type:Date
+    },
     pic:{
         type:String,
         default:"aa.jpg"
