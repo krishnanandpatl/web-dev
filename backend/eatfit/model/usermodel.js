@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 
-let dblink="mongodb+srv://krishna:tZ5wUh7Q4UWJzADJ@cluster1.uwvshfn.mongodb.net/?retryWrites=true&w=majority";
-
+let secrets=require("../secrets")
+let dblink=secrets.DB_LINK;
 //app connection to database
 mongoose.connect(dblink).then(function(){
     console.log("connected");

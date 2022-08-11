@@ -20,7 +20,13 @@ async function userController(req, res) {
 }
 
 async function updateProfileController(req,res){
-    let 
+    try{
+        let {email,name,address,}=req.body;
+        let user=await FooduserModel.findOne({email})
+
+    }catch(err){
+        res.end(err.message);
+    }
 }
 
 module.exports={
