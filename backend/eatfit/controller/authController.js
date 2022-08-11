@@ -1,4 +1,5 @@
 const FooduserModel = require("../model/usermodel");
+const nodemailer = require("nodemailer");
 //jsonweb token
 const jwt = require("jsonwebtoken");
 
@@ -65,9 +66,11 @@ async function forgotpasswordController(req, res) {
             { otp: otp ,otpExpiry:afterFiveMin},
             { new: true }
         );
+        mail(user).then(function(){
+            console.log("Mail sent");
+        }).catch(console.error);
 
         res.json({
-            data: user,
             message: "OTP Sent",
         });
     } catch (err) {
@@ -149,6 +152,31 @@ function protecteRoute(req, res, next) {
         }
     }
 }
+
+//mail sender
+async function mail(user) {
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service:"gmail",
+      host: "smtp.gmail.com",
+      secure: true,
+      auth: {
+        user: secrets.APP_MAIL, 
+        pass:secrets.APP_PASSWORD 
+      }
+    });
+  
+    let token=user.otp;
+    let dataObj={
+      from: `Food APP`,
+      to: user.email,
+      subject: "OTP",
+      html: `<b>Your OTP is= ${token}</b>`
+    }
+    // send mail with defined transport object
+    let info = await transporter.sendMail(dataObj);
+  }
 
 module.exports={
     signupController,
