@@ -8,7 +8,7 @@ async function mail() {
     host: "smtp.gmail.com",
     secure: true,
     auth: {
-      user: "krishna.hbx1@gmail.com", 
+      user: secrets.APP_MAIL, 
       pass:secrets.APP_PASSWORD 
     }
   });
