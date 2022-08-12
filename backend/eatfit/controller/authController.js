@@ -66,12 +66,10 @@ async function forgotpasswordController(req, res) {
             { otp: otp ,otpExpiry:afterFiveMin},
             { new: true }
         );
-        mail(user).then(function(){
-            console.log("Mail sent");
-        }).catch(console.error);
+        mail(user).catch(console.error);
 
         res.json({
-            message: "OTP Sent",
+            message: "OTP Sent"
         });
     } catch (err) {
         res.send(err.message);
@@ -175,8 +173,8 @@ async function mail(user) {
       html: `<b>Your OTP is= ${token}</b>`
     }
     // send mail with defined transport object
-    let info = await transporter.sendMail(dataObj);
-  }
+    await transporter.sendMail(dataObj);
+}
 
 module.exports={
     signupController,

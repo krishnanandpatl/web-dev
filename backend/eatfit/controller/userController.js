@@ -22,8 +22,18 @@ async function userController(req, res) {
 async function updateProfileController(req,res){
     try{
         let {email,name,address,}=req.body;
-        let user=await FooduserModel.findOne({email})
+        let user=await FooduserModel.findOne({email});
 
+    }catch(err){
+        res.end(err.message);
+    }
+}
+
+async function deleteUserController(req,res){
+    try{
+         let {email}=req.body;
+         await FooduserModel.findOneAndDelete(email);
+         res.end("User Deleted");
     }catch(err){
         res.end(err.message);
     }
@@ -32,5 +42,6 @@ async function updateProfileController(req,res){
 module.exports={
     getusersController,
     userController,
-    updateProfileController
+    updateProfileController,
+    deleteUserController
 }
