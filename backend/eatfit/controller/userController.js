@@ -21,8 +21,8 @@ async function userController(req, res) {
 
 async function updateProfileController(req,res){
     try{
-        let {email,name,address,}=req.body;
-        let user=await FooduserModel.findOne({email});
+        let {email,password}=req.body;
+        let user=await FooduserModel.findOne({email,password});
 
     }catch(err){
         res.end(err.message);
@@ -31,8 +31,8 @@ async function updateProfileController(req,res){
 
 async function deleteUserController(req,res){
     try{
-         let {email}=req.body;
-         await FooduserModel.findOneAndDelete(email);
+         let {email,password}=req.body;
+         await FooduserModel.findOneAndDelete({email,password});
          res.end("User Deleted");
     }catch(err){
         res.end(err.message);
