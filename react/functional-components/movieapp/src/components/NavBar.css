@@ -1,0 +1,15 @@
+.navBar{
+    border: 2px solid black;
+    height: 55px;
+    background-color: darkslategray;
+}
+.navbutton button{
+    background-color: darkslategray;
+    border: 0px;
+    color: rgb(144, 145, 146);
+}
+.navbutton button:hover{
+    color: azure;
+    font-size: 25px;
+    font-style: inherit;
+}
