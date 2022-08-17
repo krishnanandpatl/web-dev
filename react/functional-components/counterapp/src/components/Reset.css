@@ -1,0 +1,15 @@
+#top{
+    align-items: center;
+    display: flex;
+    border: 5px solid black;
+    height: 150px;
+  }
+  #cn{
+    display: flex;
+    margin-left: 50px;
+  }
+  #no{
+    display: flex;
+    margin-left: 80px;
+    margin-right: 80px;
+  }
