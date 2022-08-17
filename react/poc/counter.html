@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #top{
+            align-items: center;
+            display: flex;
+            border: 5px solid black;
+            height: 150px;
+        }
+        #counter{
+            background-color: aqua;
+            border: 1px solid black;
+            width: 200px;
+            text-align: center;
+            margin-right: 300px;
+            height: 180px;
+            
+        }
+        #counterall{
+            display: flex;
+            margin-top: 10px;
+            margin-left: 80px;
+        }
+        #cn{
+            display: flex;
+            margin-left: 50px;
+        }
+        #no{
+            display: flex;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+    </style>
+    
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        function Counterall(){
+            return <div id="counterall">
+                       <Counter value={1}></Counter>
+                       <Counter value={2}></Counter>
+                       <Counter value={3}></Counter>
+                    </div>
+        }
+        function ResetBoxes(){
+
+
+            return <div id="top">
+                       <div id="cn">
+                       <p>Counter number:</p>
+                       <input type="text" onChange={counterNumber}></input>
+                       </div>
+                       <div id="no">
+                       <p>Number:</p>
+                       <input type="text" onChange={number}></input>
+                       </div>
+                       <button onClick={resetButton}>Reset</button>
+                    </div>
+        }
+        function Counter(props){
+
+
+        let [count,updateCount] = React.useState(0);
+        const increment=()=>{
+            updateCount(count+1);
+        }
+        const decrement=()=>{
+            updateCount(count-1);
+        }
+
+            return <div id="counter">
+                <h3>Counter Number {props.value}</h3>
+                <button onClick={increment}>+</button>
+                <p>{count}</p>
+                <button onClick={decrement}>-</button>
+                </div>
+        }
+        function App(){
+            return  <div>
+                <h1>Advanced Counter App</h1>
+                <ResetBoxes></ResetBoxes>
+                <Counterall></Counterall>
+                
+                </div>   
+        }
+        ReactDOM.render(<App></App>,document.querySelector("#root"));
+    </script>
+</body>
+</html>
