@@ -9,22 +9,39 @@ function MoviesTable(props) {
         let response=await fetch('https://react-backend101.herokuapp.com/movies');
         response=await response.json();
         setLoad(false);
-        setcontent(response.movies);
+        setcontent(response);
     },[])
     
-    let filteredContent=[];
-    if(props.searchText!=""){
-        filteredContent=content.filter((movie)=>{
+    let filteredContent;
+
+    const deleteMovie=(tobeDeletedMovieId)=>{
+        let restOfTheMovies = content.movies.filter((movie) => movie._id !== tobeDeletedMovieId);
+    let newObject = { movies: restOfTheMovies };
+    setcontent(newObject);
+    }
+    
+    if(content.movies){ 
+        filteredContent=content.movies;
+        /////for searching
+      if(props.searchText!=""){
+        filteredContent=content.movies.filter((movie)=>{
             let lowerCaseTitle=movie.title.toLowerCase();
             let lowerCaseSearchText=props.searchText.toLowerCase();
             return lowerCaseTitle.includes(lowerCaseSearchText);
         })
-    }else{
-        filteredContent=content;
     }
-    if(content.length>0){    
-      filteredContent=filteredContent.slice(0,props.moviesCount)
-    } 
+    ////for genres
+        if(props.cGenre){
+            filteredContent=filteredContent.filter(function(movie){
+                return (movie.genre.name==props.cGenre);
+            })
+          }   
+          //for number of movies
+      filteredContent=filteredContent.slice(0,props.moviesCount);
+    
+    }
+ 
+    
  return (
     <div>
         {isLoaded==true?<div className='font-bold'>Loading.....</div>:
@@ -41,13 +58,15 @@ function MoviesTable(props) {
             </thead>
             <tbody>
                 {filteredContent.map(function(movie,idx){
-                    return <tr>
+                    return <tr key={movie._id}>
                     <td className='px-2 text-center'>{idx+1}</td>
                     <td className='px-2 text-center'>{movie.title}</td>
                     <td className='px-2 text-center'>{movie.genre.name}</td>
                     <td className='px-2 text-center'>{movie.numberInStock}</td>
                     <td className='px-2 text-center'>{movie.dailyRentalRate}</td>
-                    <td><button className='bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded'>Delete</button></td>
+                    <td><button className='bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded' onClick={function(){
+                        deleteMovie(movie._id);
+                    }}>Delete</button></td>
                 </tr>
                 })}
             </tbody>

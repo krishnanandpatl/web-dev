@@ -4,7 +4,7 @@ import InputBox from './InputBox';
 import MoviesTable from './MoviesTable';
 import Pagination from './Pagination';
 
-function Movies() {
+function Movies(props) {
     let [searchText,setsearchText]=React.useState("");
     let [moviesCount,setCount]=React.useState(9);
 
@@ -17,7 +17,7 @@ function Movies() {
   return (
     <div className='movies'>
       <InputBox setGlobalSearchText={setGlobalSearchText} setGlobalCount={setGlobalCount}/>
-      <MoviesTable searchText={searchText} moviesCount={moviesCount}/>
+      <MoviesTable searchText={searchText} moviesCount={moviesCount} cGenre={props.cGenre}/>
       <Pagination/>
     </div>
   )
