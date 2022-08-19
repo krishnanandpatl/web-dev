@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <div className='navBar'>
         <div className='navbutton'>
-        <button className='movie'>Movies</button>
+        <button className='imdb font-extrabold'>IMDB</button>
         <button className='login'>Login</button>
         </div>
     </div>
