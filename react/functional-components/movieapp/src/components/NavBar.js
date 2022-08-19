@@ -1,13 +1,10 @@
 import React from 'react'
-import "./NavBar.css";
 
 function NavBar() {
   return (
-    <div className='navBar'>
-        <div className='navbutton'>
-        <button className='imdb font-extrabold'>IMDB</button>
-        <button className='login'>Login</button>
-        </div>
+    <div className='p-4 bg-black'>
+        <button className='leading-tight text-3x1 text-white inline-block mr-4 font-extrabold'>IMDB</button>
+        <button className='font-medium text-blue-500 text-x1 hover:text-blue-400'>Login</button>
     </div>
   )
 }
