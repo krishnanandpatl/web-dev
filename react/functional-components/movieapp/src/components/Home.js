@@ -6,7 +6,6 @@ import MainWind from './MainWind';
 function Home() {
   return (
     <>
-    <NavBar/>
       <MainWind/>
     </>
   )

@@ -6,7 +6,10 @@ import Pagination from './Pagination';
 
 function Movies(props) {
     let [searchText,setsearchText]=React.useState("");
-    let [moviesCount,setCount]=React.useState(9);
+    let [moviesCount,setCount]=React.useState(3);
+    const [isLoaded,setLoad]=React.useState(true);
+    const [content,setcontent]=React.useState("");
+    const [cpage,setcpage]=React.useState(1);
 
     const setGlobalSearchText=(searchText)=>{
       setsearchText(searchText);
@@ -14,11 +17,19 @@ function Movies(props) {
     const setGlobalCount=(moviesCount)=>{
       setCount(moviesCount);
     } 
+      //useEffect will run only one time after first execution of return statement
+      React.useEffect(async function(){
+        let response=await fetch('https://react-backend101.herokuapp.com/movies');
+        response=await response.json();
+        setLoad(false);
+        setcontent(response);
+    },[])
   return (
     <div className='movies'>
       <InputBox setGlobalSearchText={setGlobalSearchText} setGlobalCount={setGlobalCount}/>
-      <MoviesTable searchText={searchText} moviesCount={moviesCount} cGenre={props.cGenre}/>
-      <Pagination/>
+      <MoviesTable searchText={searchText} moviesCount={moviesCount} cGenre={props.cGenre}
+      isLoaded={isLoaded} content={content} setcontent={setcontent} cpage={cpage}/>
+      <Pagination content={content} moviesCount={moviesCount}/>
     </div>
   )
 }

@@ -2,6 +2,7 @@
 //import NavBar from './components/NavBar';
 //import MainWind from './components/MainWind';
 import Router from './Router';
+import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Login from './components/Login';
 import PageNotFound from './components/PageNotFound';
@@ -14,18 +15,19 @@ import {Redirect} from 'react-router-dom';
 function MovieApp() {
   return (
     <div className="App">
+      <NavBar/>
       <Switch>
         
-          <Route path='/home'>
+          <Route path='/home' exact>
           <Home></Home>
           </Route>
-          <Route path='/login'>
+          <Route path='/login' exact>
           <Login></Login>
           </Route>
-          <Route path='/new'>
+          <Route path='/new' exact>
           <New></New>
           </Route>
-          <Redirect from='/' to='/home'></Redirect>
+          <Redirect from='/' to='/home' exact></Redirect>
           <Route>
             <PageNotFound></PageNotFound>
           </Route>

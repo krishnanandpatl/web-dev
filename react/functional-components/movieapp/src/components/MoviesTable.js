@@ -1,16 +1,7 @@
 import React from 'react'
 
 function MoviesTable(props) {
-    const [isLoaded,setLoad]=React.useState(true);
-    const [content,setcontent]=React.useState("");
-
-    //useEffect will run only one time after first execution of return statement
-    React.useEffect(async function(){
-        let response=await fetch('https://react-backend101.herokuapp.com/movies');
-        response=await response.json();
-        setLoad(false);
-        setcontent(response);
-    },[])
+let {isLoaded,setcontent,content,cpage,moviesCount}=props;
     
     let filteredContent;
 
@@ -36,8 +27,10 @@ function MoviesTable(props) {
                 return (movie.genre.name==props.cGenre);
             })
           }   
+        let sidx=(cpage-1)*moviesCount;
+        let eidx=sidx+moviesCount;
           //for number of movies
-      filteredContent=filteredContent.slice(0,props.moviesCount);
+      filteredContent=filteredContent.slice(sidx,eidx);
     
     }
  

@@ -1,12 +1,21 @@
 import React from 'react'
 
-function Pagination() {
+function Pagination(props) {
+  let {content,moviesCount}=props;
+  let pagesArray=[];
+  if(content.movies){
+  let noOfPages=Math.ceil(content.movies.length/moviesCount);
+  for(let i=1;i<=noOfPages;i++){
+      pagesArray.push(i);
+  }
+}
   return (
-    <div>
-        <button className='bg-blue-500 text-white font-bold py-1 px-3 rounded'>1</button>
-        <button className='hover:bg-red-500 text-black border-2 font-bold py-1 px-3 rounded'>2</button>
-        <button className='hover:bg-red-500 text-black border-2 font-bold py-1 px-3 rounded'>3</button>
-    </div>
+    <>
+    {pagesArray.map(function(pageNumber){
+      return  <button className='hover:bg-red-500 text-black border-2 font-bold py-1 px-3 rounded'>{pageNumber}</button>
+
+    })}
+    </>
   )
 }
 
