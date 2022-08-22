@@ -9,14 +9,44 @@ function Movies(props) {
     let [moviesCount,setCount]=React.useState(3);
     const [isLoaded,setLoad]=React.useState(true);
     const [content,setcontent]=React.useState("");
-    const [cpage,setcpage]=React.useState(1);
+    let {cpage,setcpage}=props;
 
     const setGlobalSearchText=(searchText)=>{
       setsearchText(searchText);
+      setcpage(1);
     }
     const setGlobalCount=(moviesCount)=>{
       setCount(moviesCount);
+      setcpage(1);
     } 
+
+    
+    let filteredContent;
+    let totalPagesWaliMovie;
+    if(content.movies){ 
+      filteredContent=content.movies;
+      /////for searching
+    if(props.searchText!=""){
+      filteredContent=content.movies.filter((movie)=>{
+          let lowerCaseTitle=movie.title.toLowerCase();
+          let lowerCaseSearchText=searchText.toLowerCase();
+          return lowerCaseTitle.includes(lowerCaseSearchText);
+      })
+  }
+  ////for genres
+      if(props.cGenre){
+          filteredContent=filteredContent.filter(function(movie){
+              return (movie.genre.name==props.cGenre);
+          })
+        }   
+        totalPagesWaliMovie=filteredContent;
+      let sidx=(cpage-1)*moviesCount;
+      let eidx=sidx+parseInt(moviesCount);
+        //for number of movies
+    filteredContent=filteredContent.slice(sidx,eidx);
+  
+  }
+
       //useEffect will run only one time after first execution of return statement
       React.useEffect(async function(){
         let response=await fetch('https://react-backend101.herokuapp.com/movies');
@@ -27,9 +57,9 @@ function Movies(props) {
   return (
     <div className='movies'>
       <InputBox setGlobalSearchText={setGlobalSearchText} setGlobalCount={setGlobalCount}/>
-      <MoviesTable searchText={searchText} moviesCount={moviesCount} cGenre={props.cGenre}
+      <MoviesTable searchText={searchText} filteredContent={filteredContent} cGenre={props.cGenre}
       isLoaded={isLoaded} content={content} setcontent={setcontent} cpage={cpage}/>
-      <Pagination content={content} moviesCount={moviesCount}/>
+      <Pagination totalPagesWaliMovie={totalPagesWaliMovie} moviesCount={moviesCount} cpage={cpage} setcpage={setcpage}/>
     </div>
   )
 }

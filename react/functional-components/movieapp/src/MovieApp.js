@@ -8,9 +8,7 @@ import Login from './components/Login';
 import PageNotFound from './components/PageNotFound';
 import New from './components/New';
 import React from 'react'
-import {Route} from 'react-router-dom';
-import {Switch} from 'react-router-dom';
-import {Redirect} from 'react-router-dom';
+import {Route,Switch,Redirect} from 'react-router-dom';
 
 function MovieApp() {
   return (
@@ -19,10 +17,10 @@ function MovieApp() {
       <Switch>
         
           <Route path='/home' exact>
-          <Home></Home>
+          <Home/>
           </Route>
           <Route path='/login' exact>
-          <Login></Login>
+          <Login/>
           </Route>
           <Route path='/new' exact>
           <New></New>
