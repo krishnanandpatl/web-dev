@@ -20,7 +20,7 @@ function AuthProvider({ children }) {
                 ("/api/v1/auth/signup", {
                     name: name,
                     password: password,
-                    confirmPassword: confirm,
+                    confirmpassword: confirm,
                     email
                 })
             console.log("data", res.data);

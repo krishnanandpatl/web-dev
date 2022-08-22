@@ -39,6 +39,7 @@ async function loginController(req, res) {
                     //cookie
                     res.cookie("JWT", token);
                     res.send("User logged In");
+                    console.log("logged in");
                 } else {
                     res.send("Password mismatch");
                 }

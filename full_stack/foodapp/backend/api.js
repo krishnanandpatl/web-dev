@@ -16,6 +16,6 @@ app.use("/api/v1/user",userRouter);
 //delete profile
 
 //server starting
-app.listen(3001, function () {
-    console.log("Server started at 3001");
+app.listen(3000, function () {
+    console.log("Server started at 3000");
 });
