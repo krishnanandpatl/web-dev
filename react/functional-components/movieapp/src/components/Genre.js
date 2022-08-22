@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import './Genre.css'
 //import GenreList from './GenreList';
 
@@ -6,12 +6,15 @@ function Genre(props) {
   const [isLoadedG,setLoadG]=React.useState(true);
   const [genreList,setgenreList]=React.useState("");
   
-  React.useEffect(async function(){
-       let response=await fetch("https://react-backend101.herokuapp.com/genres");
-       response=await response.json();
-       setLoadG(false);
-       setgenreList(response.genres);
-  },[])
+useEffect(function(){
+  (async function(){
+    let response=await fetch("https://react-backend101.herokuapp.com/genres");
+    response=await response.json();
+    setLoadG(false);
+    setgenreList(response.genres);
+})();
+}
+  ,[])
 
   const handleGenre=(e)=>{
     props.setGlobalGenre(e.target.innerText);

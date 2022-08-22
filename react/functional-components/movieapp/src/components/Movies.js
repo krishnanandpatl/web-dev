@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import './Movies.css';
 import InputBox from './InputBox';
 import MoviesTable from './MoviesTable';
@@ -48,12 +48,15 @@ function Movies(props) {
   }
 
       //useEffect will run only one time after first execution of return statement
-      React.useEffect(async function(){
-        let response=await fetch('https://react-backend101.herokuapp.com/movies');
-        response=await response.json();
-        setLoad(false);
-        setcontent(response);
-    },[])
+      useEffect(function(){
+        async function fn(){
+          let response=await fetch('https://react-backend101.herokuapp.com/movies');
+          response=await response.json();
+          setLoad(false);
+          setcontent(response);
+      }fn();
+      }
+        ,[])
   return (
     <div className='movies'>
       <InputBox setGlobalSearchText={setGlobalSearchText} setGlobalCount={setGlobalCount}/>
