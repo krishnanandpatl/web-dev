@@ -18,8 +18,9 @@ function Login() {
     const handleLogin = async () => {
         try {
             // console.log(email,password)
-            await login(email, password)
-            history.push("/")
+            let flag=await login(email, password)
+            if(flag)    
+                history.push("/")
           } catch(err) {
             console.log(err);
           }
@@ -42,7 +43,7 @@ function Login() {
                         <div className="entryText">Password</div>
                         <input className="password input" type="password" name="Password" placeholder="**********" onChange={(e) => passwordSet(e.target.value)} />
                     </div>
-                    <button className="loginBtn  form-button" type="submit" onClick={handleLogin}>
+                    <button className="loginBtn  form-button" onClick={handleLogin}>
                         Login
                     </button>
                     <div className='otherOption'>

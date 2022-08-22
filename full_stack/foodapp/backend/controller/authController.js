@@ -12,9 +12,13 @@ async function signupController(req, res) {
         //to create a document inside FooduserModel
         let newUser = await FooduserModel.create(data);
         console.log(newUser);
-        res.end("data recieved");
+        res.status(201).json({
+            result:"data recieved"
+        });
     } catch (err) {
-        res.end(err.message);
+        res.status(400).json({
+            result:err.message
+        });
     }
 }
 
@@ -38,19 +42,28 @@ async function loginController(req, res) {
 
                     //cookie
                     res.cookie("JWT", token);
-                    res.send("User logged In");
-                    console.log("logged in");
+                    res.status(200).json({
+                        user
+                    });
                 } else {
-                    res.send("Password mismatch");
+                    res.status(401).json({
+                        result:"Email or Password mismatch"
+                    });
                 }
             } else {
-                res.send("User not Registered. Kindly signup");
+                res.status(404).json({
+                    result:"User not Found"
+                })
             }
         } else {
-            res.end("Enter the Email or Password");
+            res.status(401).json({
+                result:"User not found kindly signup"
+            });
         }
     } catch (err) {
-        res.end(err.message);
+        res.staus(500).json({
+            result:err.message
+        });
     }
 }
 
