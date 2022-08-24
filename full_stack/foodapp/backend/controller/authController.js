@@ -1,9 +1,7 @@
 const FooduserModel = require("../model/usermodel");
-const nodemailer = require("nodemailer");
 //jsonweb token
 const jwt = require("jsonwebtoken");
-
-const secrets = require("../secrets");
+const mailSender=require("../utility/mailSender");
 //////////functions///////
 async function signupController(req, res) {
     try {
@@ -39,6 +37,8 @@ async function loginController(req, res) {
                         },
                         secrets.JWTSECRET
                     );
+                    user.password=undefined;
+                    user.confirmpassword=undefined;
 
                     //cookie
                     res.cookie("JWT", token);
@@ -69,24 +69,30 @@ async function loginController(req, res) {
 
 async function forgotpasswordController(req, res) {
     try {
-        let afterFiveMin=Date.now()+5*60*1000;
-
-        let otp = otpgenerator();
-
+       
         let { email } = req.body;
+        let user=await FooduserModel.findOne({email:email});
+        if(user){
+            let otp = otpgenerator();
+            user.otp=otp;
+            let afterFiveMin=Date.now()+5*60*1000;
+            otpExpiry=afterFiveMin;
+            await user.save();
 
-        let user = await FooduserModel.findOneAndUpdate(
-            { email: email },
-            { otp: otp ,otpExpiry:afterFiveMin},
-            { new: true }
-        );
-        mail(user).catch(console.error);
+        await mailSender(user);
 
-        res.json({
-            message: "OTP Sent"
+        res.status(204).json({
+            result: "OTP Sent"
         });
+    }else{
+        res.status(404).json({
+            result:"User not Found"
+        });
+    }
     } catch (err) {
-        res.send(err.message);
+        res.status(500).json({
+            message:err.message
+        });
     }
 }
 
@@ -94,7 +100,7 @@ async function resetpasswordController(req, res) {
     try {
         let { otp, password, confirmpassword,email} = req.body;
 
-        let user=await FooduserModel.findOne(email);
+        let user=await FooduserModel.findOne({email:email});
         let currTime=Date.now();
 
 
@@ -102,14 +108,14 @@ async function resetpasswordController(req, res) {
             user.otp=undefined;
             user.otpExpiry=undefined;
             await user.save();
-            res.json({
-                message:"Otp Expired"
+            res.status(200).json({
+                result:"Otp Expired"
             })
         }
         else{
             if(user.otp!=otp){
-                res.json({
-                    message:"otp not match"
+                res.status(400).json({
+                    result:"otp not match"
                 });
             }
         else {
@@ -123,15 +129,17 @@ async function resetpasswordController(req, res) {
         user.otpExpiry=undefined;
         await user.save();
 
-        console.log(user);
-        res.json({
+        
+        res.status(201).json({
             data:user,
-            message: "Password is reset",
+            result: "Password is reset",
         });
     }
     }
     } catch (err) {
-        res.send(err.message);
+        res.status(500).json({
+            result:err.message
+        });
     }
 }
 
@@ -163,31 +171,6 @@ function protecteRoute(req, res, next) {
             res.end(err.message);
         }
     }
-}
-
-//mail sender
-async function mail(user) {
-
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      service:"gmail",
-      host: "smtp.gmail.com",
-      secure: true,
-      auth: {
-        user: secrets.APP_MAIL, 
-        pass:secrets.APP_PASSWORD 
-      }
-    });
-  
-    let token=user.otp;
-    let dataObj={
-      from: `Food APP`,
-      to: user.email,
-      subject: "OTP",
-      html: `<b>Your OTP is= ${token}</b>`
-    }
-    // send mail with defined transport object
-    await transporter.sendMail(dataObj);
 }
 
 module.exports={

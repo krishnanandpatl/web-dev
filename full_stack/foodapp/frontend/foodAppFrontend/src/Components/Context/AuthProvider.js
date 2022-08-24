@@ -13,6 +13,9 @@ function AuthProvider({ children }) {
     // const history = useHistory();
     const [user, userSet] = useState("");
     const [loading, setLoading] = useState(false);
+    const [resetPassEmail,setResetEmail]=useState(null);
+    const [otpPassEmail,setOtp]=useState(null);
+
     async function signUp(name, password, email, confirm) {
         try {
             setLoading(true);
@@ -78,7 +81,11 @@ function AuthProvider({ children }) {
         user,
         login,
         signUp,
-        logout
+        logout,
+        resetPassEmail,
+        setResetEmail,
+        otpPassEmail,
+        setOtp
     }
     return (
         < AuthContext.Provider value={value} >
