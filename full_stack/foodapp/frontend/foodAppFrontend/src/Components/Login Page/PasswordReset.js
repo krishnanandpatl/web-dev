@@ -24,9 +24,7 @@ const resetPassword=async()=>{
             alert("Password changed successfully");
             setOtp(null);
             setResetEmail(null);
-            
-            history.push("/login");
-        }else if(res.status==400){
+        }else if(res.status==200){
             if(res.result=="Otp Expired"){
                 alert("OTP expired. Regenrate OTP again.");
 
@@ -37,11 +35,14 @@ const resetPassword=async()=>{
             setOtp(null);
             setResetEmail(null);
             
-        }else if(res.status==500){
-            alert("Internal server error");
         }
+            
+            history.push("/login");
     }catch(err){
         console.log(err.message);
+        if(err.message == "Request failed with status code 500"){
+            alert("Internal server error");
+        }
         setOtp(null);
         setResetEmail(null);
     }

@@ -12,18 +12,19 @@ function ForgetPassword() {
     const sendEmail=async()=>{
         try{
             let res=await axios.patch("/api/v1/auth/forgotpassword",{email});
-            if(res.status==404){
-                alert("User not found");
-            }else if(res.status==500){
-                alert("Internal Server Error");
-            }else{
+           
                 alert("mail sent to email");
                 setResetEmail(email);
                 //sending to otp page
                 history.push("/otp");
-            }
+            
         }catch(err){
-            console.log(err.message)
+            console.log(err.message);
+            if(err.message == "Request failed with status code 404"){
+                alert("User not found");
+            }else if(err.message == "Request failed with status code 500"){
+                alert("Internal Server Error");
+            }
         }
     }
     return (

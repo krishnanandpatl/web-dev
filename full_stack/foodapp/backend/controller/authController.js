@@ -1,5 +1,6 @@
 const FooduserModel = require("../model/usermodel");
 //jsonweb token
+const secrets=require("../secrets");
 const jwt = require("jsonwebtoken");
 const mailSender=require("../utility/mailSender");
 //////////functions///////
@@ -24,7 +25,7 @@ async function loginController(req, res) {
     try {
 
         let { email, password } = req.body;
-        if (email || password) {
+        if (email && password) {
             
             let user = await FooduserModel.findOne({ email: email });
             if (user) {
@@ -37,11 +38,11 @@ async function loginController(req, res) {
                         },
                         secrets.JWTSECRET
                     );
+                     //cookie
+                     res.cookie("JWT", token);
                     user.password=undefined;
                     user.confirmpassword=undefined;
 
-                    //cookie
-                    res.cookie("JWT", token);
                     res.status(200).json({
                         user
                     });
@@ -61,7 +62,7 @@ async function loginController(req, res) {
             });
         }
     } catch (err) {
-        res.staus(500).json({
+        res.status(500).json({
             result:err.message
         });
     }
@@ -114,7 +115,7 @@ async function resetpasswordController(req, res) {
         }
         else{
             if(user.otp!=otp){
-                res.status(400).json({
+                res.status(200).json({
                     result:"otp not match"
                 });
             }

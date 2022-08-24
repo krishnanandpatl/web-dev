@@ -27,13 +27,14 @@ function AuthProvider({ children }) {
                     confirmpassword: confirm,
                     email
                 })
-                if(res.status==400){
-                    alert("Incomplete data");
-                }
+                
             setLoading(false);
 
         } catch (err) {
-            console.log("err", err.message);
+            console.log(err.message);
+            if(err.message == "Request failed with status code 400"){
+                alert("Incomplete data");
+            }
             setLoading(false);
         }
     }
@@ -45,20 +46,10 @@ function AuthProvider({ children }) {
                 email: email,
                 password: password
             });
-            if(res.status==404){
-                alert("Email or password is incorrect");
-                flag=false;
-            }else if(res.status==401){
-                alert("User not found kindly signup");
-                flag=false;
-            }else if(res.status==500){
-                alert("Internal server error");
-                flag=false;
-            }
-            else{
+            
+            
                 // console.log("40",res.data);
-                userSet(res.data.user);
-            }
+            userSet(res.data.user);
             setLoading(false);
             return flag;
            
@@ -66,6 +57,16 @@ function AuthProvider({ children }) {
         catch (err) {
             flag=false;
             console.log(err);
+            if(err.message == "Request failed with status code 404"){
+                alert("Email or password is incorrect");
+                flag=false;
+            }else if(err.message == "Request failed with status code 401"){
+                alert("User not found kindly signup");
+                flag=false;
+            }else if(err.message == "Request failed with status code 500"){
+                alert("Internal server error");
+                flag=false;
+            }
             setLoading(false);
             return flag;
         }
