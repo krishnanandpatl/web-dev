@@ -18,9 +18,9 @@ function PlanDetail() {
         delete data.data.data["_id"]
         delete data.data.data["__v"]
         setplan(data.data.data)
-        const reviews = await axios.get("/api/getReview/" + id);
-        setarr(reviews.data.reviews)
-        console.log(arr);
+        //const reviews = await axios.get("/api/getReview/" + id);
+        //setarr(reviews.data.reviews)
+       // console.log(arr);
     }, [])
 
     function capitalizeFirstLetter(string) {
