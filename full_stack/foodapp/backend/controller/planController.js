@@ -2,7 +2,7 @@ const FoodplanModel=require("../model/planModel");
 
 async function getAllplansController(req,res){
 try{
-    let plans=await FoodplanModel.find();
+    let plans=await FoodplanModel.find().populate("reviews");
     res.status(200).json({
         Allplans:plans
     });
@@ -76,7 +76,8 @@ async function deletePlanRoute(req,res){
 async function getplanController(req,res){
     try{
         let id=req.params.id;
-        let plan=await FoodplanModel.findById({_id:id});
+        let plan=await FoodplanModel.findById({_id:id}).
+        populate("reviews");
         res.status(200).json({
             result:"plan found",
             plan:plan});

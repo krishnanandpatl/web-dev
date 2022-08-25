@@ -13,14 +13,14 @@ function PlanDetail() {
     const [rate, setrate] = useState();
     const { user } = useAuth();
     useEffect(async () => {
-        const data = await axios.get(`/api/plans/${id}`)
+        const data = await axios.get(`/api/v1/plan/${id}`)
         console.log(data.data.data);
         delete data.data.data["_id"]
         delete data.data.data["__v"]
         setplan(data.data.data)
-        //const reviews = await axios.get("/api/getReview/" + id);
-        //setarr(reviews.data.reviews)
-       // console.log(arr);
+        const reviews = await axios.get("/api/v1/review" + id);
+        setarr(reviews.data.reviews)
+        console.log(arr);
     }, [])
 
     function capitalizeFirstLetter(string) {
@@ -29,13 +29,13 @@ function PlanDetail() {
     console.log(rate);
     const handleClick = async () => {
         console.log(123645);
-        const data = await axios.post("/api/reviews", {
+        const data = await axios.post("/api/v1/review", {
             "review": review,
             "rating": rate,
             "user": user.user._id,
             "plan": id
         })
-        const reviews = await axios.get("/api/getReview/" + id);
+        const reviews = await axios.get("/api/v1/review" + id);
         setarr(reviews.data.reviews);
     }
     const handleDelete = async() =>{

@@ -3,7 +3,7 @@ const userRouter=express.Router();
 const {userController,getusersController, updateProfileController,deleteUserController}=require("../controller/userController");
 const {protecteRoute}=require("../controller/authController");
 //
-userRouter.get("/users", protecteRoute, getusersController);
+userRouter.get("/", protecteRoute, getusersController);
 
 //profile data
 userRouter.get("/user", protecteRoute, userController);

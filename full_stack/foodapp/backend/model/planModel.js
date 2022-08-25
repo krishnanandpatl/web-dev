@@ -24,7 +24,12 @@ let planSchema=new mongoose.Schema({
             // error
             message: "Discount must be less than actual price",
         },
-    }
+    },
+    reviews:{
+        type:[mongoose.Schema.ObjectId],
+        ref:"FoodreviewModel"
+    },
+    averageRating:Number
 })
 //model
 const FoodplanModel=mongoose.model('FoodplanModel',planSchema);
