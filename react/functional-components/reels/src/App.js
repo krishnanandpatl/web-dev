@@ -1,13 +1,13 @@
 import './App.css';
 import React from 'react'
-import Context from './poc/context';
+import ThemeChange from './Theme Change/ThemeChange';
 
 
 function App() {
  
   return (
     <>
-    <Context/>
+    <ThemeChange/>
     </>
   );
 }
