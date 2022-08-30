@@ -31,7 +31,7 @@ function App() {
         <PageNotFound/>
       </Route>
     </Switch>
-  );
+      );
 }
 
 export default App;
