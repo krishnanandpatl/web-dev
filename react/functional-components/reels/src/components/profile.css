@@ -1,0 +1,36 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+}
+.header{
+    border-bottom: 2px solid black;
+    height: 5rem;
+}
+.content{
+    line-height: 1.5;
+    font-size: 1.5rem;
+    color: grey;
+}
+.main{
+    display: flex;
+    height: calc(100vh- 10rem);
+    align-items: center;
+    justify-content: space-evenly;
+}
+.main>*{
+     height: 80%;
+     width: 40%;
+}
+.pimg{
+    margin-top: 5rem;
+    height: 20rem;
+    width: 20rem;
+    border-radius: 50%;
+}
+.details{
+    text-align: center;
+}
+.bold_text{
+    color: black;
+    font-weight: bold;
+}
