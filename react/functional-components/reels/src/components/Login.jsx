@@ -9,7 +9,7 @@ function Login() {
   let [user,setUser]=useState(null);
   let [loader,setLoader]=useState(false);
   let [error,setError]=useState("");
-
+  let [mainloader,setMainloader]=useState(true);
 
   const submit=async()=>{
     try{
@@ -35,12 +35,14 @@ function Login() {
         }else{
             setUser(null);
         }
+        setMainloader(false);
       });
   },[]);
 
   return (
     <>
       {
+      mainloader==true?<h1>Page Loading......</h1>:
       error!=""?<h1>Error is {error}</h1>:
          loader==true?<h1>.......Loading....</h1>:
             user!=null?
