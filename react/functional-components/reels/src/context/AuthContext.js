@@ -8,16 +8,16 @@ export function AuthContextProvider({children}){
     let [mainloader,setMainloader]=useState(true);
 
     useEffect(()=>{
-        onAuthStateChanged(auth,(cUser)=>{
-          if(cUser){
-              setUser(cUser);
+        onAuthStateChanged(auth,(user)=>{
+          if(user){
+              setUser(user);
           }else{
               setUser(null);
           }
           setMainloader(false);
         });
     },[]);
-    let value={cUser};
+    let value=cUser;
     return (
         <AuthContext.Provider value={value}>
            {mainloader==false&&children}
