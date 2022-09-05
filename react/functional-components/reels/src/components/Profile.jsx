@@ -3,7 +3,6 @@ import './profile.css';
 import {useContext} from 'react';
 import {AuthContext} from '../context/AuthContext'
 import { useEffect } from 'react';
-import { async } from '@firebase/util';
 import {db} from '../firebase';
 import {doc,getDoc} from 'firebase/firestore';
 
@@ -40,7 +39,7 @@ useEffect(function fun(){
       <div className="details">
         <div className="content">{user.name}</div>
         <div className='content'>No. of Post: {user.reelsIds.length}<span className="bold_text"> Posts</span></div>
-        <div className="content">{user.email} <span className="bold_text">@ddd.com</span></div>
+        <div className="content">Email: <span className='bold_text'>{user.email}</span></div>
       </div>
     </div>
     </>}
