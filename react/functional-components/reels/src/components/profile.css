@@ -29,6 +29,7 @@ body{
 }
 .details{
     text-align: center;
+    margin-top: 2rem;
 }
 .bold_text{
     color: black;

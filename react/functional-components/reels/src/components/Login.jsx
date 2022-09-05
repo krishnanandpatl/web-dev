@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword,signOut,onAuthStateChanged} from 'firebase/auth'
+import { useContext } from 'react';
 import { async } from '@firebase/util';
 
 function Login() {
@@ -42,7 +43,6 @@ function Login() {
   return (
     <>
       {
-      mainloader==true?<h1>Page Loading......</h1>:
       error!=""?<h1>Error is {error}</h1>:
          loader==true?<h1>.......Loading....</h1>:
             user!=null?
