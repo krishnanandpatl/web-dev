@@ -12,7 +12,7 @@ function Feed() {
     </div>
     <div className="main_container">
         <div className="upload_conatiner">
-        <i class="fa-solid fa-clapperboard movie_icon"></i>
+        <i className="fa-solid fa-clapperboard movie_icon"></i>
         <div className='upload_text'>UPLOAD VIDEO</div>
         </div>
         <div className="reels_conatiner">Reels</div>

@@ -8,13 +8,14 @@ export function AuthContextProvider({children}){
     let [mainloader,setMainloader]=useState(true);
 
     useEffect(()=>{
-        onAuthStateChanged(auth,(user)=>{
+        const unsubscribe=onAuthStateChanged(auth,(user)=>{
           if(user){
               setUser(user);
           }else{
               setUser(null);
           }
           setMainloader(false);
+          return unsubscribe;
         });
     },[]);
     let value=cUser;
