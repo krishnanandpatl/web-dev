@@ -1,7 +1,7 @@
 import React,{useReducer} from 'react'
 
-//for simple work useState
-//for complex work useReducer
+//for simple state useState
+//for complex state useReducer
 function Reducer() {
   const initialState=0;
   const reducer=(state,action)=>{
@@ -29,3 +29,4 @@ function Reducer() {
 }
 
 export default Reducer;
+//dispatch is the function which will run reducer with initialstate and action too
