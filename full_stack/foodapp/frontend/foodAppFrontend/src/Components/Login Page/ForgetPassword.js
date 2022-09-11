@@ -11,7 +11,7 @@ function ForgetPassword() {
     const history=useHistory();
     const sendEmail=async()=>{
         try{
-            let res=await axios.patch("/api/v1/auth/forgotpassword",{email});
+            let res=await axios.patch("https://foodapp8737.herokuapp.com/api/v1/auth/forgotpassword",{email});
            
                 alert("mail sent to email");
                 setResetEmail(email);

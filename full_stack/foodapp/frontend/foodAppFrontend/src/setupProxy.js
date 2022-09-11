@@ -5,7 +5,7 @@ module.exports = function (app) {
     app.use("/api",
         createProxyMiddleware({
             // server ke home page ka link
-            target: 'https://localhost:3000',
+            target: 'https://foodapp8737.herokuapp.com/',
             changeOrigin: true,
         })
     );

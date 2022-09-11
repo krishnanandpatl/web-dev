@@ -21,7 +21,7 @@ function AuthProvider({ children }) {
             setLoading(true);
             console.log("signup will be here");
             let res = await axios.post
-                ("/api/v1/auth/signup", {
+                ("https://foodapp8737.herokuapp.com/api/v1/auth/signup", {
                     name: name,
                     password: password,
                     confirmpassword: confirm,
@@ -42,7 +42,7 @@ function AuthProvider({ children }) {
         let flag=true;
         try {
             setLoading(true);
-            const res = await axios.post("/api/v1/auth/login", {
+            const res = await axios.post("https://foodapp8737.herokuapp.com/api/v1/auth/login", {
                 email: email,
                 password: password
             });

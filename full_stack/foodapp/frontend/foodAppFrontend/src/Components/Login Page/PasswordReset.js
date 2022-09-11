@@ -14,7 +14,7 @@ function PasswordReset() {
 //api call of reset password
 const resetPassword=async()=>{
     try{
-        let res= await axios.patch("/api/v1/auth/resetpassword",{
+        let res= await axios.patch("https://foodapp8737.herokuapp.com/api/v1/auth/resetpassword",{
             otp:otpPassEmail,
             password:password,
             confirmpassword:passwordCnf,
