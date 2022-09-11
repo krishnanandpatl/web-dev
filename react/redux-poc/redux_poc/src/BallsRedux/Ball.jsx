@@ -23,3 +23,8 @@ const mapDispatchToProps=(dispatch)=>{
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Ball);
+
+//connect can also be written as 
+//const connectedWithpropsFns=connect(mapStateToProps,mapDispatchtoProps)
+//const connectedWithBall=connectedWithpropsFns(Ball);
+//export default connectedWithBall;
