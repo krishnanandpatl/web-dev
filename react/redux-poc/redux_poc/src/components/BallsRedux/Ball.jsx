@@ -13,7 +13,7 @@ function Ball(prop) {
 }
 
 const mapStateToProps=(store)=>{
-  return store;
+  return store.Ball;
 }
 const mapDispatchToProps=(dispatch)=>{
   return{

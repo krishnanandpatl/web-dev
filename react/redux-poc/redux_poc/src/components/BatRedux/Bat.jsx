@@ -16,7 +16,7 @@ function Bat(props) {
   )
 }
 const storeToprops=(store)=>{
-    return store;
+    return store.Bat;
 }
 const dispatcToStore=(dispatch)=>{
 return {
