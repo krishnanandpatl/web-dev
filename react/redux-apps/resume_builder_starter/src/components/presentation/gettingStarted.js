@@ -47,7 +47,7 @@ function GettingStarted(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        document: state.document
+        document: state
     }
 }
 const mapDispatchToProps = dispatch => {
